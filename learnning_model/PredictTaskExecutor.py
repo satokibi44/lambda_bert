@@ -32,7 +32,7 @@ class PredictTaskExecutor:
 
         model = Bert()
 
-        model_path = "/Users/fumiya/Downloads/best_epoche23"
+        model_path = "/mnt/lambda/model/best_epoche23"
 
         model.load_state_dict(torch.load(
             model_path, map_location=torch.device('cpu')))

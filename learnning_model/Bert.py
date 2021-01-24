@@ -8,6 +8,7 @@ import torch.nn as nn
 import torch.optim as optim
 import math
 from transformers.modeling_bert import BertModel
+import pickle
 
 MAX_SEQ_LEN = 256
 
@@ -17,7 +18,9 @@ class Bert(nn.Module):
 
     def __init__(self):
         super(Bert, self).__init__()
-        model = BertModel.from_pretrained('bert-base-japanese-whole-word-masking')
+        #model = BertModel.from_pretrained('bert-base-japanese-whole-word-masking')
+        with open("/mnt/lambda/variable/bert.pickle", "rb") as ff:
+            model = pickle.load(ff)
         # BERTモジュール
         self.bert = model  # 日本語学習済みのBERTモデル
 
