@@ -29,3 +29,8 @@ def lambda_handler(event, context):
         },
         'body': json.dumps(res_body)
     }
+
+
+predictTaskExecutor = PredictTaskExecutor()
+decode_sentence = predictTaskExecutor.main("お疲れ様です")
+print(decode_sentence)

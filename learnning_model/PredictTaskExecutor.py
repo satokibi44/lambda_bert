@@ -1,6 +1,5 @@
-from learnning_model.Transformer import Transformer
+from learnning_model.Bert import Bert
 import torch
-from Bert import Bert
 
 from transformers.tokenization_bert_japanese import BertJapaneseTokenizer
 
@@ -17,16 +16,15 @@ class PredictTaskExecutor:
         sentence = tokenizer.encode(sentence, return_tensors='pt').to(device)
         tokens = torch.zeros(MAX_SEQ_LEN, dtype=torch.long).to(device)
         net = net.to(device)
-        for i in range(len(text[0])):
-            tokens[i] = round(text[0][i].item())
+        for i in range(len(sentence[0])):
+            tokens[i] = round(sentence[0][i].item())
 
         with torch.set_grad_enabled(False):
             outputs = net(tokens.unsqueeze(0))
-            print(outputs)
             _, preds = torch.max(outputs, 1)  # ラベルを予測
             pred2 = torch.softmax(outputs, 1)
 
-        return pred2
+        return pred2[0].tolist()
 
     def main(self, sentence):
 
@@ -34,7 +32,7 @@ class PredictTaskExecutor:
 
         model = Bert()
 
-        model_path = "/content/drive/MyDrive/Colab Notebooks/KusoripuMetrix2/model/best_epoche23"
+        model_path = "/Users/fumiya/Downloads/best_epoche23"
 
         model.load_state_dict(torch.load(
             model_path, map_location=torch.device('cpu')))
