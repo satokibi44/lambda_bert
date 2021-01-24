@@ -5,7 +5,7 @@ from transformers.tokenization_bert_japanese import BertJapaneseTokenizer
 
 import pickle
 
-MAX_SEQ_LEN = 75
+MAX_SEQ_LEN = 256
 class PredictTaskExecutor:
 
     def predict_task_executor(self, net, sentence):
