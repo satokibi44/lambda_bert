@@ -18,9 +18,10 @@ def lambda_handler(event, context):
             'body': 'test'
         }
     predictTaskExecutor = PredictTaskExecutor()
-    decode_sentence = predictTaskExecutor.main(sentence)
+    label = predictTaskExecutor.main(sentence)
+    kusoripu_score = label[1]
 
-    res_body = {'encode_sentence': sentence,'decode_sentence': decode_sentence}
+    res_body = {'sentence': sentence, 'kusoripu_score': kusoripu_score}
     return {
         'statusCode': 200,
         'headers': {
