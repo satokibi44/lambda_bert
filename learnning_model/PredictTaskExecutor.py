@@ -10,7 +10,8 @@ class PredictTaskExecutor:
 
     def predict_task_executor(self, net, sentence):
         net.eval()
-        tokenizer = BertJapaneseTokenizer.from_pretrained('bert-base-japanese-whole-word-masking')
+        tokenizer = BertJapaneseTokenizer.from_pretrained(
+            '/mnt/lambda/variable/tokenizer')
 
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         sentence = tokenizer.encode(sentence, return_tensors='pt').to(device)
