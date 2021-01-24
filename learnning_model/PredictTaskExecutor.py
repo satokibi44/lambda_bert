@@ -11,7 +11,8 @@ class PredictTaskExecutor:
     def predict_task_executor(self, net, sentence):
         net.eval()
         tokenizer = BertJapaneseTokenizer.from_pretrained(
-            '/mnt/lambda/variable/tokenizer')
+            '/mnt/lambda/variable/tokenizer', mecab_kwargs={"mecab_option": "-d /mnt/lambda/lib/mecab/dic/mecab-ipadic-neologd"})
+
 
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         sentence = tokenizer.encode(sentence, return_tensors='pt').to(device)
